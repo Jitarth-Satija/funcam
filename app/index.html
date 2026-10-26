@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Snap &amp; Cinema FX</title>
+<style>
+  :root { --bg:#141118; --card:#1e1a24; --line:#2e2836; --text:#eee8f4; --dim:#9a90a8; --gold:#ffcf4a; --bad:#ff7a7a; --ok:#7be0a0; }
+  * { box-sizing: border-box; }
+  html, body { height:100%; margin:0; background:var(--bg); color:var(--text); font:13px/1.45 system-ui, Segoe UI, sans-serif; overflow:hidden; }
+  #app { display:flex; height:100%; }
+  #main { flex:1; display:flex; flex-direction:column; min-width:0; padding:14px; gap:10px; }
+  #stage { flex:1; min-height:0; display:grid; place-items:center; background:#000; border-radius:10px; border:1px solid var(--line); overflow:hidden; }
+  #out { max-width:100%; max-height:100%; object-fit:contain; }
+  .bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  select, button { font:inherit; color:var(--text); background:var(--card); border:1px solid var(--line); border-radius:7px; padding:6px 10px; cursor:pointer; max-width:260px; }
+  button.primary { background:var(--gold); color:#1a1520; border-color:var(--gold); font-weight:600; }
+  #status { padding:9px 12px; border-radius:8px; background:var(--card); border:1px solid var(--line); color:var(--dim); }
+  #status.ok { color:var(--ok); } #status.bad { color:var(--bad); }
+  #side { width:340px; border-left:1px solid var(--line); }
+  #settings { width:100%; height:100%; border:0; }
+  #engine { position:fixed; width:2px; height:2px; left:-20px; top:-20px; border:0; opacity:0; pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="main">
+    <div id="stage"><canvas id="out" width="960" height="540"></canvas></div>
+    <div class="bar">
+      <select id="cam" title="Real camera"></select>
+      <select id="size" title="Output size">
+        <option value="640x360">640×360 (light)</option>
+        <option value="960x540" selected>960×540</option>
+        <option value="1280x720">1280×720 (HD)</option>
+      </select>
+      <button id="toggle" class="primary">Stop</button>
+    </div>
+    <div id="status">Starting…</div>
+  </div>
+  <div id="side"><iframe id="settings" src="popup.html"></iframe></div>
+</div>
+<iframe id="engine" src="engine.html" aria-hidden="true" tabindex="-1"></iframe>
+<script src="chrome-shim.js"></script>
+<script src="host.js"></script>
+</body>
+</html>

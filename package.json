@@ -1,0 +1,30 @@
+{
+  "name": "snap-cinema-fx-desktop",
+  "version": "1.8.0",
+  "description": "Snap & Cinema FX - gesture effects as a virtual webcam for any Windows app",
+  "author": "Snap Cinema FX",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.snapcinemafx.desktop",
+    "productName": "Snap Cinema FX",
+    "asar": false,
+    "directories": { "output": "dist" },
+    "files": ["main.js", "preload.js", "package.json", "app/**/*"],
+    "extraResources": [{ "from": "helper-dist/vcam_helper.exe", "to": "helper/vcam_helper.exe" }],
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "icon": "build/icon.ico" },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "artifactName": "SnapCinemaFX-Setup-${version}.exe"
+    }
+  }
+}

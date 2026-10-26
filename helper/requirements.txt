@@ -1,0 +1,3 @@
+pyvirtualcam
+numpy
+pyinstaller
